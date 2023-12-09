@@ -1,10 +1,10 @@
-import { SignInForm } from "./RegisterForm";
+import { RegisterForm } from "./RegisterForm";
 
 const SignInPage = () => {
   return (
     <main>
       <h1>Register</h1>
-      <SignInForm />
+      <RegisterForm />
     </main>
   );
 };
