@@ -1,7 +1,10 @@
+import { SignInForm } from './SignInForm';
+
 const SignInPage = () => {
   return (
-    <main>
+    <main className="container">
       <h1>Sign In</h1>
+      <SignInForm />
     </main>
   );
 };

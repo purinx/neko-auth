@@ -16,7 +16,7 @@ jest.mock('react-dom', () => ({
 }));
 
 describe('RegisterForm', () => {
-  test('inputが入力できる', async () => {
+  test('入力できる', async () => {
     render(<RegisterForm />);
 
     const form = await screen.findByRole('form');
