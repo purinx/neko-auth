@@ -1,8 +1,8 @@
 name: CI main push
 on: [push]
 env:
-  SUPABASE_URL: 'test'
-  SUPABASE_ADMIN_KEY: 'http://test.com/resas'
+  SUPABASE_URL: 'http://test.co'
+  SUPABASE_ADMIN_KEY: 'xxxxxxxx'
 jobs:
   setup:
     name: CI
