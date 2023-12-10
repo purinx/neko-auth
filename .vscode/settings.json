@@ -1,3 +1,4 @@
 {
-  "cSpell.words": ["Neko", "supabase"]
+  "cSpell.words": ["Neko", "supabase"],
+  "eslint.lintTask.enable": true
 }
