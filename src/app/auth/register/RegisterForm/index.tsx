@@ -1,8 +1,9 @@
 'use client';
 
 import { Field, Form, Label, Message } from '@radix-ui/react-form';
-import { register } from '../actions';
 import { useFormState } from 'react-dom';
+
+import { register } from '../actions';
 
 /**
  * @radix-ui/react-form が useContextを使っているのが憎い

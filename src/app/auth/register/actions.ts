@@ -1,7 +1,9 @@
 "use server";
-import { supabase } from "@/lib/supabase";
 import { redirect } from "next/navigation";
+
 import z from "zod";
+
+import { supabase } from "@/lib/supabase";
 
 const RegisterSchema = z.object({
   email: z.string().email(),

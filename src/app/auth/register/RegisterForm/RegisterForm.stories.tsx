@@ -1,4 +1,5 @@
 import { Meta } from '@storybook/react';
+
 import { RegisterForm } from '.';
 
 const meta: Meta = {

@@ -1,8 +1,8 @@
 import '@testing-library/jest-dom';
 import { render, screen, fireEvent } from '@testing-library/react';
+import { act } from 'react-dom/test-utils';
 
 import { RegisterForm } from '.';
-import { act } from 'react-dom/test-utils';
 
 const dummy = {
   name: 'test',
