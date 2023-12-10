@@ -1,14 +1,19 @@
+"use server";
 import { supabase } from "@/lib/supabase";
 import { redirect } from "next/navigation";
 import z from "zod";
 
 const RegisterSchema = z.object({
   email: z.string().email(),
-  name: z.string(),
+  name: z.string().min(1),
   password: z.string().min(8),
 });
 
-export const register = async (data: FormData) => {
+type State = {
+  errors: { [key: string]: string[] | undefined };
+};
+
+export const register = async (_prev: State, data: FormData) => {
   const validation = RegisterSchema.safeParse({
     email: data.get("email"),
     name: data.get("name"),
@@ -34,6 +39,8 @@ export const register = async (data: FormData) => {
   if (error) {
     throw error;
   }
+
+  await supabase.auth.signInWithPassword({ email, password });
 
   redirect("/dashboard");
 };
