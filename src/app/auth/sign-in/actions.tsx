@@ -1,5 +1,6 @@
 'use server';
 import { redirect } from 'next/navigation';
+import { cookies } from 'next/headers';
 
 import z from 'zod';
 
@@ -15,6 +16,7 @@ type State = {
 };
 
 export const signIn = async (_prev: State, data: FormData) => {
+  const cookie = cookies();
   const validation = RegisterSchema.safeParse({
     email: data.get('email'),
     password: data.get('password'),
@@ -26,7 +28,14 @@ export const signIn = async (_prev: State, data: FormData) => {
 
   const { email, password } = validation.data;
 
-  await supabase.auth.signInWithPassword({ email, password });
+  const res = await supabase.auth.signInWithPassword({ email, password });
+  console.log(res);
+  if (res.data.session) {
+    supabase.auth.setSession(res.data.session);
 
-  redirect('/dashboard');
+    // server actionでログインさせるには自前でtokenをcookieにセットする必要がある
+    cookie.set('token', res.data.session.access_token);
+    redirect('/dashboard');
+  }
+  return { errors: { password: ['Invalid email or password'] } };
 };

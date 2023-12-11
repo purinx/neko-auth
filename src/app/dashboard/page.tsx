@@ -1,9 +1,17 @@
 import { redirect } from 'next/navigation';
+import { cookies } from 'next/headers';
 
 import { supabase } from '@/lib/supabase';
 
 const DashboardPage = async () => {
-  const { data: auth } = await supabase.auth.getUser();
+  const cookie = cookies();
+  const token = cookie.get('token');
+  if (!token) {
+    console.error('No token found');
+    redirect('/auth/sign-in');
+  }
+
+  const { data: auth } = await supabase.auth.getUser(token.value);
   if (!auth.user) {
     console.error('User not found');
     redirect('/auth/sign-in');
@@ -15,7 +23,7 @@ const DashboardPage = async () => {
     .single();
 
   return (
-    <main>
+    <main className="container">
       <h1>{user?.name} Dashboard</h1>
     </main>
   );
