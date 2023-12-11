@@ -27,7 +27,7 @@ export default function Home() {
           </h2>
         </a>
         <a
-          href="Sign In"
+          href="/auth/sign-in"
           className={styles.card}
           target="_blank"
           rel="noopener noreferrer"
@@ -38,7 +38,7 @@ export default function Home() {
         </a>
 
         <a
-          href="Dashboard"
+          href="/dashboard"
           className={styles.card}
           target="_blank"
           rel="noopener noreferrer"
