@@ -1,7 +1,7 @@
 name: CI main push
 on: [push]
 env:
-  SUPABASE_URL: 'http://test.co'
+  NEXT_PUBLIC_SUPABASE_URL: 'http://test.co'
   SUPABASE_ADMIN_KEY: 'xxxxxxxx'
 jobs:
   setup:
