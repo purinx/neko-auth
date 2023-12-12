@@ -1,0 +1,10 @@
+.floating {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 200px;
+  height: 40px;
+  font-size: 20px;
+  padding: 4px;
+  margin: 0;
+}

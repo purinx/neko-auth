@@ -3,6 +3,7 @@ import { cookies } from 'next/headers';
 
 import { supabase } from '@/lib/supabase';
 import { DescriptionList } from '@/lib/components/layouts/DescriptionList';
+import { SignOutButton } from './SignOutButton';
 
 const DashboardPage = async () => {
   const cookie = cookies();
@@ -37,6 +38,7 @@ const DashboardPage = async () => {
         <dt>email</dt>
         <dd>{auth.user.email}</dd>
       </DescriptionList>
+      <SignOutButton />
     </main>
   );
 };
