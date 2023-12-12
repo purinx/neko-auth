@@ -10,7 +10,6 @@ import { signIn } from '../actions';
  */
 export const SignInForm = () => {
   const [{ errors }, dispatch] = useFormState(signIn, { errors: {} });
-  console.log(errors);
   return (
     <Form role="form" action={dispatch}>
       <Field name="email">

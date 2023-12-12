@@ -29,7 +29,6 @@ export const signIn = async (_prev: State, data: FormData) => {
   const { email, password } = validation.data;
 
   const res = await supabase.auth.signInWithPassword({ email, password });
-  console.log(res);
   if (res.data.session) {
     supabase.auth.setSession(res.data.session);
 
