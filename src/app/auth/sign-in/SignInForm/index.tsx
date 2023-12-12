@@ -1,9 +1,10 @@
 'use client';
 
-import { Field, Form, Label, Message } from '@radix-ui/react-form';
+import { Field, Form, Label } from '@radix-ui/react-form';
 import { useFormState } from 'react-dom';
 
 import { signIn } from '../actions';
+import { ErrorMessage } from '@/lib/components/typographies';
 
 /**
  * @radix-ui/react-form が useContextを使っているのが憎い
@@ -11,21 +12,27 @@ import { signIn } from '../actions';
 export const SignInForm = () => {
   const [{ errors }, dispatch] = useFormState(signIn, { errors: {} });
   return (
-    <Form role="form" action={dispatch}>
+    <Form role="form">
       <Field name="email">
         <Label htmlFor="signIn-form-email">Email</Label>
         {errors.email?.map((e) => (
-          <Message key={e}>{e}</Message>
+          <ErrorMessage key={e}>{e}</ErrorMessage>
         ))}
-        <Message match="valueMissing">必須です。</Message>
-        <input id="signIn-form-email" name="email" autoComplete="email" type="email" />
+        <input
+          id="signIn-form-email"
+          aria-invalid={errors.email && 'true'}
+          name="email"
+          autoComplete="email"
+          type="email"
+        />
       </Field>
       <Field name="password">
         <Label htmlFor="signIn-form-pw">Password</Label>
         {errors.password?.map((e) => (
-          <Message key={e}>{e}</Message>
+          <ErrorMessage key={e}>{e}</ErrorMessage>
         ))}
         <input
+          aria-invalid={errors.password && 'true'}
           id="signIn-form-pw"
           name="password"
           autoComplete="password"

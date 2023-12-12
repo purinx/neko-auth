@@ -18,7 +18,7 @@ export const RegisterForm = () => {
         {errors.name?.map((e) => (
           <ErrorMessage key={e}>{e}</ErrorMessage>
         ))}
-        <input aria-invalid={!!errors.name} id="register-form-name" name="name" />
+        <input aria-invalid={errors.name && 'true'} id="register-form-name" name="name" />
       </Field>
       <Field name="email">
         <Label htmlFor="register-form-email">Email</Label>
@@ -26,7 +26,7 @@ export const RegisterForm = () => {
           <ErrorMessage key={e}>{e}</ErrorMessage>
         ))}
         <input
-          aria-invalid={!!errors.email}
+          aria-invalid={errors.email && 'true'}
           id="register-form-email"
           name="email"
           autoComplete="email"
@@ -39,7 +39,7 @@ export const RegisterForm = () => {
           <ErrorMessage key={e}>{e}</ErrorMessage>
         ))}
         <input
-          aria-invalid={!!errors.password}
+          aria-invalid={errors.password && 'true'}
           id="register-form-pw"
           name="password"
           autoComplete="password"
