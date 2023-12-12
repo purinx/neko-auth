@@ -1,15 +1,13 @@
 'use client';
 
 import { Field, Form, Label } from '@radix-ui/react-form';
-import { useFormState } from 'react-dom';
+import { useFormState, useFormStatus } from 'react-dom';
 
 import { signIn } from '../actions';
 import { ErrorMessage } from '@/lib/components/typographies';
 
-/**
- * @radix-ui/react-form が useContextを使っているのが憎い
- */
 export const SignInForm = () => {
+  const { pending } = useFormStatus();
   const [{ errors }, dispatch] = useFormState(signIn, { errors: {} });
   return (
     <Form role="form">
@@ -39,7 +37,12 @@ export const SignInForm = () => {
           type="password"
         />
       </Field>
-      <button formAction={dispatch} type="submit">
+      <button
+        formAction={dispatch}
+        type="submit"
+        aria-busy={pending}
+        aria-disabled={pending}
+      >
         signIn
       </button>
     </Form>
