@@ -14,6 +14,7 @@ const DashboardPage = async () => {
 
   const { data: auth } = await supabase.auth.getUser(token.value);
   if (!auth.user) {
+    cookie.delete('token');
     redirect('/auth/sign-in');
   }
   const { data: user } = await supabase
