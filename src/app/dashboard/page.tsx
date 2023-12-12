@@ -7,13 +7,11 @@ const DashboardPage = async () => {
   const cookie = cookies();
   const token = cookie.get('token');
   if (!token) {
-    console.error('No token found');
     redirect('/auth/sign-in');
   }
 
   const { data: auth } = await supabase.auth.getUser(token.value);
   if (!auth.user) {
-    console.error('User not found');
     redirect('/auth/sign-in');
   }
   const { data: user } = await supabase
