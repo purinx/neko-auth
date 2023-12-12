@@ -1,9 +1,10 @@
-"use server";
-import { redirect } from "next/navigation";
+'use server';
+import { redirect } from 'next/navigation';
+import { cookies } from 'next/headers';
 
-import z from "zod";
+import z from 'zod';
 
-import { supabase } from "@/lib/supabase";
+import { supabase } from '@/lib/supabase';
 
 const RegisterSchema = z.object({
   email: z.string().email(),
@@ -17,9 +18,9 @@ type State = {
 
 export const register = async (_prev: State, data: FormData) => {
   const validation = RegisterSchema.safeParse({
-    email: data.get("email"),
-    name: data.get("name"),
-    password: data.get("password"),
+    email: data.get('email'),
+    name: data.get('name'),
+    password: data.get('password'),
   });
 
   if (!validation.success) {
@@ -34,15 +35,20 @@ export const register = async (_prev: State, data: FormData) => {
     email_confirm: true,
   });
 
-  const { error } = await supabase
-    .from("users")
-    .insert({ id: auth.user?.id, name });
+  const { error } = await supabase.from('users').insert({ id: auth.user?.id, name });
 
   if (error) {
     throw error;
   }
+  const cookie = cookies();
+  const res = await supabase.auth.signInWithPassword({ email, password });
+  if (res.data.session) {
+    supabase.auth.setSession(res.data.session);
 
-  await supabase.auth.signInWithPassword({ email, password });
+    // server actionでログインさせるには自前でtokenをcookieにセットする必要がある
+    cookie.set('token', res.data.session.access_token);
+    redirect('/dashboard');
+  }
 
-  redirect("/dashboard");
+  redirect('/dashboard');
 };
