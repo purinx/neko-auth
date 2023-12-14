@@ -13,6 +13,7 @@ const dummy = {
 jest.mock('react-dom', () => ({
   ...jest.requireActual('react-dom'),
   useFormState: () => [{ errors: {} }, jest.fn()],
+  useFormStatus: () => [{ errors: {} }, jest.fn()],
 }));
 
 describe('RegisterForm', () => {
